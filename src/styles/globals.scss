@@ -1,0 +1,157 @@
+// Basic colors: All others are derivatives of these
+
+$background: #5c2363;
+$foreground: #EDE6EE;
+$inverse-foreground: #000;
+
+$accent-1: #DF3DB1;
+$accent-2: #00FF99;
+$accent-3: #F5FE00;
+$accent-4: #7713E9;
+
+// Generated colors
+
+$background-100: darken($background, 16%);
+$background-200: darken($background, 12%);
+$background-300: darken($background, 6%);
+$background-400: $background;
+
+$foreground-100: $foreground;
+$foreground-200: darken($foreground, 20%);
+$foreground-300: darken($foreground, 40%);
+
+
+// Window colors
+
+$window-background: $background-200;
+$window-hover: $background-300;
+
+$seperator: #000;
+
+$titlebar-background: $background-100;
+$playbar-background: $background-100;
+
+// Sizing
+
+$scale: 1;
+$font_scale: 1;
+
+$max-content-width: 1100px;
+$radius: 8.5px;
+$item-gap: 16px * $scale;
+$side-padding: 21px;
+$gradient-s: 32px * $scale;
+$item-scale: 18px * $scale;
+$font-size: 15px * $font_scale;
+
+$profile-pic-large-size: $item-scale * 3 * $scale;
+
+.vue-feather > svg{
+    width: $item-scale;
+}
+
+h1,h2,h3,h4,h5,h6{
+    padding: 0px;
+    margin: 0px;
+}
+
+h1{
+    font-size: $font-size * 5 * $scale;
+}
+
+// Text
+
+*{
+    font-family: 'Rubik', Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+.subtext{
+    color: $foreground-200;
+    font-size: $font-size * .85;
+}
+
+.mono-value{
+    font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+    text-transform: full-width;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    letter-spacing: 1px;
+    white-space: pre;
+    font-size: $font-size * .85;
+    &.secondary{
+        font-weight: 500;
+    }
+    white-space: pre;
+}
+
+// Animations
+
+$animation-duration: 70ms;
+$animation-timing: ease-in-out;
+
+// Icons
+
+.icon-btn{
+    stroke: $foreground-100;
+    cursor: pointer;
+    svg{
+        transition-duration: $animation-duration;
+        transition-timing-function: $animation-timing;
+    }
+    &:hover svg{
+        stroke: $foreground-200;
+    }
+    &:active svg{
+        stroke: $foreground-100;
+    }
+}
+
+// Mixins
+
+@mixin side-gradient($direction, $color, $size: $gradient-s){
+    -webkit-mask-image: linear-gradient($direction, #000 80%, transparent);
+}
+
+@mixin glass($color, $soft, $box){
+    background-color: rgba($color, .5);
+    backdrop-filter: saturate(150%) contrast(120%) brightness(60%) blur(16px);
+    @if $box {
+        border: 1px rgba(255,255,255,.2) solid;
+        border-radius: $radius;
+        box-shadow: 0px 0px 0px 1px #000,
+                    0px 5px 7px -1px rgba(0,0,0,0.3),
+                    0px 8px 29px 6px rgba(0,0,0,0.5),
+              inset 0px 4px 0px -3px rgba(255,255,255,.4);
+    }
+
+    @if $soft{
+        background-color: rgba($color, .85);
+        backdrop-filter: saturate(150%) contrast(120%) brightness(70%) blur(24px);
+    }
+}
+
+// Sliders
+
+.slider-target{
+    --slider-height: 2px;
+}
+
+.slider-connect{
+    background: $accent-2;
+}
+
+.slider-base{
+    background: $background-200;
+}
+
+.slider-tooltip{
+    background: $accent-2;
+    &:before{
+        border-color: $accent-2;
+    }
+}
+
+.vue-slider-dot-tooltip-text{
+    color: $inverse-foreground;
+}

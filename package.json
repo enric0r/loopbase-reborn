@@ -1,0 +1,43 @@
+{
+  "name": "loopbase-revamp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps",
+    "compile:windows": "electron-builder --win",
+    "compile:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "@fontsource/rubik": "^5.0.18",
+    "@ibm/plex": "^6.3.0",
+    "@ts-pro/vue-eternal-loading": "^1.3.1",
+    "@vue/cli-service": "^5.0.8",
+    "babel": "^6.23.0",
+    "cheerio": "=1.0.0-rc.3",
+    "electron-devtools-installer": "^3.2.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "vue-cli-plugin-electron-builder": "^2.1.1",
+    "vue-feather": "^2.0.0",
+    "vue-slider-component": "^4.1.0-beta.7"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.6.0",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "electron-serve": "^1.3.0",
+    "electron-vite": "^2.0.0",
+    "sass": "^1.70.0",
+    "sass-loader": "^14.0.0",
+    "vite": "^5.0.12",
+    "vue": "^3.4.15",
+    "webpack": "^5.90.0"
+  }
+}
