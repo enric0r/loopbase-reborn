@@ -2,8 +2,13 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  build_on_linux:
-    runs-on: windows-latest
+  build_all:
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      matrix: 
+        os: [linux-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
