@@ -1,17 +1,18 @@
 'use strict'
 
-import { app, protocol, BrowserWindow, ipcMain, shell } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import { search, downloadMP3 } from './loopermanData';
 import * as fs from 'fs';
 import { homedir } from 'os';
 import { join } from 'path';
+const { shell } = require('electron')
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 const pref = {
     dir : {
-        content: homedir() + "/loopbaseContent"
+        content: homedir() + "\\loopbaseContent"
     }
 }
 
@@ -169,7 +170,7 @@ ipcMain.handle('fileDelete', async (event, path) =>{
 });
 
 ipcMain.handle('revealFile', (event, path)=>{
-    shell.showItemInFolder(pref.dir.content + "/" + path);
+    shell.openPath(pref.dir.content + "\\" + path.replace("/","\\").substring(0, path.lastIndexOf("/")));
 })
 
 ipcMain.handle('openLink', async (event, url) =>{

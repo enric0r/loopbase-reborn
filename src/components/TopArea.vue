@@ -2,10 +2,10 @@
     <div class="top-area">
         <p ref="LibraryName" class="LibraryName">
             {{query.keys == undefined || query.keys == "" ? library_name : "Search results for:"}}</p>
-        <h1>
+        <h2>
             <span :if="query.keys == undefined || query.keys == ''">{{query.keys}}</span>
             {{section_name}}
-        </h1>
+        </h2>
         <SearchBar
             placeholder="Search for loops..."
             @submitSearch="this.$parent.$parent.search()"
@@ -199,6 +199,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="tag"
+                    @click.self="filterEnabled.category = !filterEnabled.category">
+                    Category
+                </div>
             </div>
             <div class="tag-duo">
                 <div
@@ -246,6 +250,7 @@
         <div class="results-header" v-if="search_header">
             <div style="width: 52px">User</div>
             <div style="flex-grow: 1">Title</div>
+            <div>Duration</div>
             <div style="width: 68px">Key</div>
             <div style="width: 183px">Tempo</div>
         </div>
@@ -327,7 +332,7 @@
         border-bottom: 1px solid $background-300;
         width: calc(100% + 1px);    // TODO: Find a better alternative to this questionable hack
         box-sizing: border-box;
-        h1{
+        h2{
             margin: auto;
         }
     }

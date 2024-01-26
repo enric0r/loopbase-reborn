@@ -53,7 +53,8 @@ function search(args){
                     author: $(el).find(".icon-user").text(),
                     profile_pic: $(el).find("div.player-top > div:nth-child(1) > a > img").prop("src"),
                     waveform: $(el).find("div.player-middle > div > div.jp-progress > div > img").prop("src"),
-                    web_link: $(el).find(".player-top > a").prop("href")
+                    web_link: $(el).find("div.player-top > div.player-title-wrapper > a").prop("href"),
+                    duration: $(el).find("div.player-bottom > div.jp-time-wrapper > span:nth-child(2)").text()
                 });
             });
             $('#body-left .tag-wrapper').each((i, el) => {

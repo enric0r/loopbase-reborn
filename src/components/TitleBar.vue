@@ -1,9 +1,8 @@
 <template>
     <div class="title-bar">
         <div class="window-btns">
-            <div></div>
-            <div></div>
-            <div></div>
+            <div><h4>♾️</h4></div>
+            <div><h4>LoopBase</h4></div>
         </div>
         <SearchBar
             placeholder="Search for loops..."
@@ -12,8 +11,8 @@
             id="topSearch"
         />
         <div class="actions">
-            <vue-feather size="24" type="folder"  @click="revealFile('')"></vue-feather>
-            <vue-feather size="24" type="settings" ></vue-feather>
+            <vue-feather size="24" type="folder" @click="revealFile('')"/>
+            <vue-feather size="24" type="settings" @click="showSettings()"/>
         </div>
     </div>
 </template>
@@ -31,6 +30,9 @@
         methods: {
             revealFile(f){
                 electron.ipcRenderer.invoke('revealFile', f);
+            },
+            showSettings(){
+                window.open();
             }
         },
     };
