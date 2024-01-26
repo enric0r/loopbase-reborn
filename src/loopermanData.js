@@ -2,6 +2,7 @@ const cheerio = require('cheerio');
 var request = require('request');
 const path = require('path');
 const fs = require('fs');
+const referrer = {'Referer': 'https://www.looperman.com'}
 
 async function downloadMP3(url, dest){
     return new Promise((resolve, reject) => {
@@ -14,7 +15,8 @@ async function downloadMP3(url, dest){
 
         request({
             uri: url,
-            timeout: 60000
+            timeout: 60000,
+            headers: referrer
         })
         .pipe(file)
         .on('finish', () => {
@@ -43,7 +45,8 @@ function search(args){
                 + key
                 + "&ftempo="+args.tempo[0]
                 + "&ttempo="+args.tempo[1],
-            timeout: 60000
+            timeout: 60000,
+            headers: referrer
         }, function (err, res) {
             const $ = cheerio.load(res.body);
             $('#body-left .player-wrapper').each((i, el) => {
@@ -51,8 +54,8 @@ function search(args){
                     title: $(el).find(".player-title").text(),
                     mp3_url: $(el).prop("rel"),
                     author: $(el).find(".icon-user").text(),
-                    profile_pic: $(el).find(".player-avatar a img").prop("src"),
-                    waveform: $(el).find(".player-waveform-image").prop("src"),
+                    profile_pic: $(el).find("div.player-top > div:nth-child(1) > a > img").prop("src"),
+                    waveform: $(el).find("div.player-middle > div > div.jp-progress > div > img").prop("src"),
                     web_link: $(el).find(".player-top > a").prop("href")
                 });
             });

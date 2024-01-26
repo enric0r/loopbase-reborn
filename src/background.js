@@ -15,6 +15,21 @@ const pref = {
     }
 }
 
+
+function UpsertKeyValue(obj, keyToChange, value) {
+    const keyToChangeLower = keyToChange.toLowerCase();
+    for (const key of Object.keys(obj)) {
+      if (key.toLowerCase() === keyToChangeLower) {
+        // Reassign old key
+        obj[key] = value;
+        // Done
+        return;
+      }
+    }
+    // Insert at end instead
+    obj[keyToChange] = value;
+  }
+
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -44,6 +59,23 @@ async function createWindow() {
         // Load the index.html when not in development
         win.loadURL('app://./index.html')
   }
+    win.webContents.session.webRequest.onBeforeSendHeaders(
+      (details, callback) => {
+        const { requestHeaders } = details;
+        UpsertKeyValue(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
+        UpsertKeyValue(requestHeaders, 'Referer', "https://www.looperman.com")
+        callback({ requestHeaders });
+      },
+    );
+    win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+      const { responseHeaders } = details;
+      UpsertKeyValue(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
+      UpsertKeyValue(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
+      UpsertKeyValue(requestHeaders, 'Referer', "https://www.looperman.com")
+      callback({
+        responseHeaders,
+      });
+    });
 }
 
 // Quit when all windows are closed.
