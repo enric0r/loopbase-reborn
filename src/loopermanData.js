@@ -2,7 +2,6 @@ const cheerio = require('cheerio');
 var request = require('request');
 const path = require('path');
 const fs = require('fs');
-const referrer = {'Referer': 'https://www.looperman.com'}
 
 async function downloadMP3(url, dest){
     return new Promise((resolve, reject) => {
@@ -16,7 +15,6 @@ async function downloadMP3(url, dest){
         request({
             uri: url,
             timeout: 60000,
-            headers: referrer
         })
         .pipe(file)
         .on('finish', () => {
@@ -46,7 +44,6 @@ function search(args){
                 + "&ftempo="+args.tempo[0]
                 + "&ttempo="+args.tempo[1],
             timeout: 60000,
-            headers: referrer
         }, function (err, res) {
             const $ = cheerio.load(res.body);
             $('#body-left .player-wrapper').each((i, el) => {

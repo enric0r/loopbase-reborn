@@ -63,7 +63,7 @@ async function createWindow() {
       (details, callback) => {
         const { requestHeaders } = details;
         UpsertKeyValue(requestHeaders, 'Access-Control-Allow-Origin', ['*']);
-        UpsertKeyValue(requestHeaders, 'Referer', "https://www.looperman.com")
+        UpsertKeyValue(requestHeaders, 'Referer', "https://www.looperman.com");
         callback({ requestHeaders });
       },
     );
@@ -71,7 +71,6 @@ async function createWindow() {
       const { responseHeaders } = details;
       UpsertKeyValue(responseHeaders, 'Access-Control-Allow-Origin', ['*']);
       UpsertKeyValue(responseHeaders, 'Access-Control-Allow-Headers', ['*']);
-      UpsertKeyValue(requestHeaders, 'Referer', "https://www.looperman.com")
       callback({
         responseHeaders,
       });
