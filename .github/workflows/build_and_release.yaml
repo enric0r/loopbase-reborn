@@ -14,8 +14,6 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: 16
-    - name: install dependencies
-      run: npm install
     - name: Electron Builder Action
       uses: samuelmeuli/action-electron-builder@v1.6.0
       env:
