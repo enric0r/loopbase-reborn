@@ -51,7 +51,7 @@ export default {
         return {
             resultsData: [],
             query: {
-                category: 'loops',
+                category: 0,
                 keys: '',
                 order: ['date', 'd'],
                 tempo: [0, 200],
