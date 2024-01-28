@@ -200,8 +200,48 @@
                     </div>
                 </div>
                 <div class="tag"
-                    @click.self="filterEnabled.category = !filterEnabled.category">
-                    Category
+                    @click.self="filterEnabled.category = !filterEnabled.category"
+                    :class="{ active: queryInfo.category != 0 }
+                ">
+                        <div
+                            @click="filterEnabled.category = !filterEnabled.category;
+                                    filterValues.category = queryInfo.category"
+                        >
+                            Category<span
+                                v-if="queryInfo.category != 0"
+                                class="hide-bp-300"
+                            >: {{
+                                categorylist.find(e => e[0] == queryInfo.category)[1]
+                            }}</span>
+                        </div>
+                        <vue-feather
+                            type="x"
+                            size="18"
+                            @click="
+                                queryInfo.category = 0;
+                                this.$parent.$parent.search();
+                            "
+                            :class="{hidden: queryInfo.category == 0}"
+                        />
+                </div>
+                <div class="tag-popout" :class="{ hidden: !filterEnabled.category }">
+                    <h2>Category</h2>
+                    <div class="select">
+                        <div
+                            class="option"
+                            v-for="category in categorylist"
+                            :key="category[0]"
+                            :class="{selected : parseInt(category[0]) == queryInfo.category}"
+                            @click="
+                                queryInfo.category = parseInt(category[0]);
+                                this.$parent.$parent.search();
+                                filterEnabled.category = false;
+                                filterAdded.category = true;
+                            "
+                        >
+                            {{category[1]}}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="tag-duo">
@@ -280,7 +320,7 @@
         data() {
             return {
                 queryInfo: {
-                    category:       'loops',
+                    category:       0,
                     order:          ['date', 'd'],
                     tempo:          [0,200],
                     tempoRange:     false,
@@ -296,18 +336,21 @@
                     tempo: false,
                     key: false,
                     sort: false,
-                    genre: false
+                    genre: false,
+                    category: false
                 },
                 filterAdded: {
                     tempo: false,
                     key: false,
-                    genre: false
+                    genre: false,
+                    category: false
                 },
                 filterValues: {
                     tempoRange:          [0,200],
-                    key:                ['', false],
+                    key:                ['', false]
                 },
-                genrelist: [['0', 'All Genres'], ['56', '8Bit Chiptune'], ['52', 'Acid'], ['3', 'Acoustic'], ['67', 'Afrobeat'], ['2', 'Ambient'], ['66', 'Big Room'], ['33', 'Blues'], ['65', 'Boom Bap'], ['37', 'Breakbeat'], ['21', 'Chill Out'], ['36', 'Cinematic'], ['13', 'Classical'], ['51', 'Comedy'], ['44', 'Country'], ['39', 'Crunk'], ['17', 'Dance'], ['55', 'Dancehall'], ['30', 'Deep House'], ['23', 'Dirty'], ['18', 'Disco'], ['11', 'Drum And Bass'], ['5', 'Dub'], ['49', 'Dubstep'], ['64', 'EDM'], ['42', 'Electro'], ['16', 'Electronic'], ['15', 'Ethnic'], ['25', 'Folk'], ['19', 'Funk'], ['46', 'Fusion'], ['24', 'Garage'], ['31', 'Glitch'], ['43', 'Grime'], ['53', 'Grunge'], ['48', 'Hardcore'], ['61', 'Hardstyle'], ['27', 'Heavy Metal'], ['7', 'Hip Hop'], ['22', 'House'], ['63', 'Indie'], ['38', 'Industrial'], ['6', 'Jazz'], ['10', 'Jungle'], ['69', 'Latin'], ['62', 'Lo-Fi'], ['57', 'Moombahton'], ['34', 'Orchestral'], ['70', 'Phonk'], ['50', 'Pop'], ['60', 'Psychedelic'], ['14', 'Punk'], ['8', 'Rap'], ['20', 'Rave'], ['4', 'Reggae'], ['32', 'Reggaeton'], ['45', 'Religious'], ['12', 'RnB'], ['1', 'Rock'], ['29', 'Samba'], ['41', 'Ska'], ['59', 'Soul'], ['47', 'Spoken Word'], ['9', 'Techno'], ['28', 'Trance'], ['54', 'Trap'], ['58', 'Trip Hop'], ['68', 'UK Drill'], ['35', 'Weird']]
+                genrelist: [['0', 'All Genres'], ['56', '8Bit Chiptune'], ['52', 'Acid'], ['3', 'Acoustic'], ['67', 'Afrobeat'], ['2', 'Ambient'], ['66', 'Big Room'], ['33', 'Blues'], ['65', 'Boom Bap'], ['37', 'Breakbeat'], ['21', 'Chill Out'], ['36', 'Cinematic'], ['13', 'Classical'], ['51', 'Comedy'], ['44', 'Country'], ['39', 'Crunk'], ['17', 'Dance'], ['55', 'Dancehall'], ['30', 'Deep House'], ['23', 'Dirty'], ['18', 'Disco'], ['11', 'Drum And Bass'], ['5', 'Dub'], ['49', 'Dubstep'], ['64', 'EDM'], ['42', 'Electro'], ['16', 'Electronic'], ['15', 'Ethnic'], ['25', 'Folk'], ['19', 'Funk'], ['46', 'Fusion'], ['24', 'Garage'], ['31', 'Glitch'], ['43', 'Grime'], ['53', 'Grunge'], ['48', 'Hardcore'], ['61', 'Hardstyle'], ['27', 'Heavy Metal'], ['7', 'Hip Hop'], ['22', 'House'], ['63', 'Indie'], ['38', 'Industrial'], ['6', 'Jazz'], ['10', 'Jungle'], ['69', 'Latin'], ['62', 'Lo-Fi'], ['57', 'Moombahton'], ['34', 'Orchestral'], ['70', 'Phonk'], ['50', 'Pop'], ['60', 'Psychedelic'], ['14', 'Punk'], ['8', 'Rap'], ['20', 'Rave'], ['4', 'Reggae'], ['32', 'Reggaeton'], ['45', 'Religious'], ['12', 'RnB'], ['1', 'Rock'], ['29', 'Samba'], ['41', 'Ska'], ['59', 'Soul'], ['47', 'Spoken Word'], ['9', 'Techno'], ['28', 'Trance'], ['54', 'Trap'], ['58', 'Trip Hop'], ['68', 'UK Drill'], ['35', 'Weird']],
+                categorylist : [['0','All Categories'],['40','Accordion'],['47','Arpeggio'],['35','Bagpipe'],['36','Banjo'],['2','Bass'],['43','Bass Guitar'],['44','Bass Synth'],['39','Bass Wobble'],['31','Beatbox'],['42','Bells'],['23','Brass'],['34','Choir'],['37','Clarinet'],['28','Didgeridoo'],['1','Drum'],['7','Flute'],['5','Fx'],['24','Groove'],['33','Guitar Acoustic'],['3','Guitar Electric'],['25','Harmonica'],['41','Harp'],['30','Harpsichord'],['32','Mandolin'],['22','Orchestral'],['26','Organ'],['11','Pad'],['20','Percussion'],['21','Piano'],['46','Rhodes Piano'],['12','Scratch'],['9','Sitar'],['45','Soundscapes'],['10','Strings'],['4','Synth'],['8','Tabla'],['38','Ukulele'],['29','Violin'],['6','Vocal'],['27','Woodwind']]
             }
         },
         methods:{

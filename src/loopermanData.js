@@ -32,17 +32,23 @@ function search(args){
         let key = args.filterByKey ? ("&mkey="+args.key[0]+args.key[1]) : "";
         var date = args.date == 0 ? '' : '&when=' + args.date;
         var genre = args.genre == 0 ? '' : '&gid=' + args.genre;
+        var category = args.category == 0 ? '&cid=' : '&cid=' + args.category;
+        const url = 'https://looperman.com/loops'
+            + '?page=' + args.page
+            + category
+            + '&keys=' + args.keys
+            + '&order=' + args.order[0]
+            + date
+            + genre
+            + "&dir=" + args.order[1]
+            + key
+            + "&ftempo=" + args.tempo[0]
+            + "&ttempo=" + args.tempo[1];
+
+        console.log("Request URL:", url); //DEBUG 
+
         request({
-            url: 'https://looperman.com/' + args.category
-                + '?page='+ args.page
-                + '&keys=' + args.keys
-                + '&order=' + args.order[0]
-                + date
-                + genre
-                + "&dir="+args.order[1]
-                + key
-                + "&ftempo="+args.tempo[0]
-                + "&ttempo="+args.tempo[1],
+            url: url,
             timeout: 60000,
         }, function (err, res) {
             const $ = cheerio.load(res.body);
