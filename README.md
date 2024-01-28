@@ -3,7 +3,7 @@
 # ⚠️ **Disclaimer**
 > **Loopbase-Reborn is not affiliated in any way with Looperman.**
 
-Please note this is a fork of the official [loopbase](https://github.com/ryntab/loopbase) which is a fork of [looperman-desktop](https://github.com/joshuali7536/looperman-desktop).
+Please note this is a fork of [loopbase](https://github.com/ryntab/loopbase) which is a fork of [looperman-desktop](https://github.com/joshuali7536/looperman-desktop).
 
 > ⚠️ App still in development: You may encounter bugs, some features are missing or subject to change.
 
