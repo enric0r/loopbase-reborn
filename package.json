@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@fontsource/rubik": "^5.0.18",
-    "@ibm/plex": "^6.3.0",
+    "@ibm/plex": "^6.4.0",
     "@ts-pro/vue-eternal-loading": "^1.3.1",
     "@vue/cli-service": "^5.0.8",
     "babel": "^6.23.0",
