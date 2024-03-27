@@ -24,7 +24,7 @@
     "fs": "^0.0.1-security",
     "path": "^0.12.7",
     "request": "^2.88.2",
-    "terser": "^5.27.0",
+    "terser": "^5.30.0",
     "vue-cli-plugin-electron-builder": "^2.1.1",
     "vue-feather": "^2.0.0",
     "vue-slider-component": "^4.1.0-beta.7"
